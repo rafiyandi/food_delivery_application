@@ -44,7 +44,6 @@ class _MainPageState extends State<MainPage> {
                 margin: EdgeInsets.only(top: 15, bottom: 4),
                 child: Column(
                   children: [
-                    indicator(),
                     Image.asset(
                       _currentindex == 0
                           ? "assets/icon/icon_home_select.png"

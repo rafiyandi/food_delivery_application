@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_aplication/pages/detail_product_page.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,7 +9,10 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DetailProductPage()));
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         height: 207,
