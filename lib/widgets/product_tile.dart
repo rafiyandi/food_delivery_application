@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/pages/detail_product_page.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({Key? key}) : super(key: key);
@@ -11,12 +10,12 @@ class ProductTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DetailProductPage()));
+            MaterialPageRoute(builder: (context) => const DetailProductPage()));
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         height: 207,
-        width: 155,
+        width: 163,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
@@ -25,13 +24,13 @@ class ProductTile extends StatelessWidget {
                 color: Colors.grey.shade300,
                 blurRadius: 0.1,
                 spreadRadius: 0.5,
-                offset: Offset(1, 1),
+                offset: const Offset(1, 1),
               ),
               BoxShadow(
                 color: secondaryColor,
                 blurRadius: 0,
                 spreadRadius: 1,
-                offset: Offset(-4, -4),
+                offset: const Offset(-4, -4),
               ),
             ]),
         child: Column(
@@ -43,7 +42,7 @@ class ProductTile extends StatelessWidget {
                   "assets/icon/icon_star.png",
                   width: 16,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 Text(
@@ -52,14 +51,14 @@ class ProductTile extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 7,
             ),
             Image.asset(
               "assets/img/image_burger.png",
               width: 87,
             ),
-            SizedBox(
+            const SizedBox(
               height: 11,
             ),
 
@@ -72,14 +71,14 @@ class ProductTile extends StatelessWidget {
                   style:
                       titleTextStyle.copyWith(fontSize: 18, fontWeight: bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 4,
                 ),
                 Text(
                   "200 gr chicken + cheese\nLettuce + tomato",
                   style: titleTextStyle.copyWith(fontSize: 11),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 7,
                 ),
                 Row(

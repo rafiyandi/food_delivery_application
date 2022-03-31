@@ -5,8 +5,8 @@ class BagPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text("Bag Page")),
+    return const Scaffold(
+      body: const Center(child: Text("Bag Page")),
     );
   }
 }

@@ -153,7 +153,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                children: [
+                children: const [
                   ProductTile(),
                   SizedBox(
                     width: 17,
@@ -161,8 +161,11 @@ class HomePage extends StatelessWidget {
                   ProductTile(),
                 ],
               ),
+              const SizedBox(
+                height: 17,
+              ),
               Row(
-                children: [
+                children: const [
                   ProductTile(),
                   SizedBox(
                     width: 17,
@@ -170,8 +173,11 @@ class HomePage extends StatelessWidget {
                   ProductTile(),
                 ],
               ),
+              const SizedBox(
+                height: 17,
+              ),
               Row(
-                children: [
+                children: const [
                   ProductTile(),
                   SizedBox(
                     width: 17,
@@ -185,7 +191,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.only(top: 47, bottom: 10, left: 24, right: 24),
+        margin: const EdgeInsets.only(top: 20, bottom: 10, left: 24, right: 24),
         child: ListView(
           children: [
             location(),
