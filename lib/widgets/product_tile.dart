@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/pages/detail_product_page.dart';
+import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
+import 'package:get/get.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({Key? key}) : super(key: key);
@@ -9,8 +11,7 @@ class ProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const DetailProductPage()));
+        Get.toNamed(RouteName.detailProduct);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

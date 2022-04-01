@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/pages/sign_up_page.dart';
+import 'package:food_delivery_aplication/routes/route_name.dart';
+import 'package:get/get.dart';
 
 import '../shared/theme.dart';
 
@@ -169,7 +171,9 @@ class _SignInPageState extends State<SignInPage> {
         width: double.infinity,
         child: TextButton(
             // onPressed: hendleSignIn,
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(RouteName.home);
+            },
             style: TextButton.styleFrom(
                 backgroundColor: primaryColor,
                 shape: RoundedRectangleBorder(
@@ -192,8 +196,7 @@ class _SignInPageState extends State<SignInPage> {
                 style: subtitleTextStyle.copyWith(fontSize: 12)),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()));
+                Get.toNamed(RouteName.signUp);
               },
               child: Text(
                 "Sign Up",

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/pages/sign_in_page.dart';
+import 'package:food_delivery_aplication/routes/route_name.dart';
+import 'package:get/get.dart';
 
 import '../shared/theme.dart';
 
@@ -296,8 +298,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: subtitleTextStyle.copyWith(fontSize: 12)),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignInPage()));
+                Get.toNamed(RouteName.signIn);
               },
               child: Text(
                 "Sign In",
