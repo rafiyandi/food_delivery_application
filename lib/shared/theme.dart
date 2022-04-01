@@ -6,14 +6,18 @@ Color secondaryColor = const Color(0xffFFFFFF);
 Color titleColor = const Color(0xff0D0D0D);
 Color priceColor = const Color(0xffFF9431);
 Color subtitleColor = const Color(0xffABABAB);
+Color secondsubtitleColor = const Color(0xff504F5E);
 
 Color backgroundColor1 = const Color(0xffFFF1E5);
 
 TextStyle primaryTextStyle = GoogleFonts.roboto(color: primaryColor);
+TextStyle secondPrimaryTextStyle = GoogleFonts.poppins(color: primaryColor);
 TextStyle secondaryTextStyle = GoogleFonts.dmSans(color: secondaryColor);
 TextStyle titleTextStyle = GoogleFonts.dmSans(color: titleColor);
 TextStyle priceTextStyle = GoogleFonts.dmSans(color: priceColor);
 TextStyle subtitleTextStyle = GoogleFonts.roboto(color: subtitleColor);
+TextStyle secondSubtitleTextStyle =
+    GoogleFonts.poppins(color: secondsubtitleColor);
 
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;

@@ -52,6 +52,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
             margin: const EdgeInsets.only(
               left: 24,
               right: 24,
+              top: 22,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,11 +76,14 @@ class _DetailProductPageState extends State<DetailProductPage> {
           CarouselSlider(
               items: images
                   .map(
-                    (image) => Image.asset(
-                      image,
-                      width: MediaQuery.of(context).size.width,
-                      height: 310,
-                      fit: BoxFit.cover,
+                    (image) => Padding(
+                      padding: const EdgeInsets.only(left: 18, right: 18),
+                      child: Image.asset(
+                        image,
+                        width: MediaQuery.of(context).size.width,
+                        height: 310,
+                        // fit: BoxFit.cover,
+                      ),
                     ),
                   )
                   .toList(),

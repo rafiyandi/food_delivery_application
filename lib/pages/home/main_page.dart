@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
       height: 4,
       decoration: BoxDecoration(
           color: priceColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(28),
             bottomRight: Radius.circular(28),
           )),
@@ -41,7 +41,7 @@ class _MainPageState extends State<MainPage> {
         items: [
           BottomNavigationBarItem(
             icon: Container(
-                margin: EdgeInsets.only(top: 15, bottom: 4),
+                margin: const EdgeInsets.only(top: 15, bottom: 4),
                 child: Column(
                   children: [
                     Image.asset(
@@ -57,7 +57,7 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Container(
-                margin: EdgeInsets.only(top: 15, bottom: 4),
+                margin: const EdgeInsets.only(top: 15, bottom: 4),
                 child: Column(
                   children: [
                     Image.asset(
@@ -73,13 +73,13 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Container(
-                margin: EdgeInsets.only(top: 15, bottom: 4),
+                margin: const EdgeInsets.only(top: 15, bottom: 4),
                 child: Column(
                   children: [
                     Image.asset(
                       _currentindex == 2
-                          ? "assets/icon/icon_chat_select.png"
-                          : "assets/icon/icon_chat_orange.png",
+                          ? "assets/icon/icon_profile_select.png"
+                          : "assets/icon/icon_profile_orange.png",
                       width: 22.5,
                       // color: _currentindex == 0 ? priceColor : Colors.grey,
                     ),
@@ -98,13 +98,13 @@ class _MainPageState extends State<MainPage> {
   Widget body() {
     switch (_currentindex) {
       case 0:
-        return HomePage();
+        return const HomePage();
       case 1:
-        return BagPage();
+        return const BagPage();
       case 2:
         return ProfilePage();
       default:
-        return HomePage();
+        return const HomePage();
     }
   }
 
