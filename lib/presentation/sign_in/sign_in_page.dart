@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_aplication/infrastruktur/auth/auth_repository.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
@@ -13,33 +15,20 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController passwordController = TextEditingController(text: '');
-  bool isLoading = false;
+  // bool isLoading = false;
+
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  bool _isHiddenPassword = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHiddenPassword = !_isHiddenPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-
-    // hendleSignIn() async {
-    //   setState(() {
-    //     isLoading = true;
-    //   });
-
-    //   if (await authProvider.login(
-    //       email: emailController.text, password: passwordController.text)) {
-    //     Navigator.pushNamed(context, '/home');
-    //   } else {
-    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //         'Login Gagal',
-    //         textAlign: TextAlign.center,
-    //       ),
-    //       backgroundColor: alertColor,
-    //     ));
-    //   }
-    //   setState(() {
-    //     isLoading = false;
-    //   });
-    // }
-
     Widget header() {
       return Container(
           margin: const EdgeInsets.only(
@@ -123,7 +112,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 12),
             Container(
               height: 50,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 1),
               decoration: BoxDecoration(
                   color: secondaryColor,
                   borderRadius: BorderRadius.circular(12),
@@ -146,15 +135,28 @@ class _SignInPageState extends State<SignInPage> {
                       width: 16,
                     ),
                     Expanded(
-                        child: TextFormField(
-                      controller: passwordController,
-                      style: primaryTextStyle,
-                      obscureText: true,
-                      decoration: InputDecoration.collapsed(
-                        hintText: "Your Password",
-                        hintStyle: subtitleTextStyle,
+                      child: TextFormField(
+                        controller: passwordController,
+                        style: primaryTextStyle,
+                        obscureText: _isHiddenPassword,
+                        decoration: InputDecoration(
+                          suffixIcon: GestureDetector(
+                            onTap: _togglePasswordVisibility,
+                            child: Icon(
+                              _isHiddenPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color:
+                                  _isHiddenPassword ? priceColor : Colors.grey,
+                            ),
+                          ),
+                          border: InputBorder.none,
+                          // isCollapsed: true,
+                          hintText: "Your Password",
+                          hintStyle: subtitleTextStyle,
+                        ),
                       ),
-                    ))
+                    )
                   ],
                 ),
               ),
@@ -171,8 +173,12 @@ class _SignInPageState extends State<SignInPage> {
         width: double.infinity,
         child: TextButton(
             // onPressed: hendleSignIn,
-            onPressed: () {
-              Get.toNamed(RouteName.mainPage);
+            onPressed: () async {
+              try {
+                await _validateAuthentication();
+              } on Exception catch (e) {
+                Get.snackbar('hi', e.toString());
+              }
             },
             style: TextButton.styleFrom(
                 backgroundColor: priceColor,
@@ -215,19 +221,34 @@ class _SignInPageState extends State<SignInPage> {
         body: SafeArea(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                header(),
-                emailInput(),
-                passwordInput(),
-                // isLoading ? LoadingButton() : signInButton(),
-                signInButton(),
-                const Spacer(),
-                footer(),
-              ],
+            child: Form(
+              key: _formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  header(),
+                  emailInput(),
+                  passwordInput(),
+                  // isLoading ? LoadingButton() : signInButton(),
+                  signInButton(),
+                  const Spacer(),
+                  footer(),
+                ],
+              ),
             ),
           ),
         ));
+  }
+
+  Future<void> _validateAuthentication() async {
+    if (_formkey.currentState!.validate()) {
+      AuthRepository _authRepository = AuthRepository();
+      _authRepository
+          .signIn(emailController.text, passwordController.text)
+          .then((value) => print("Berhasil masuk"))
+          .catchError((error) => print(error));
+    } else {
+      print("Not Validated");
+    }
   }
 }
