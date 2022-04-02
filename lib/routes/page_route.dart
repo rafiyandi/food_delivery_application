@@ -1,14 +1,15 @@
-import 'package:food_delivery_aplication/pages/detail_product_page.dart';
-import 'package:food_delivery_aplication/pages/edit_profile.dart';
-import 'package:food_delivery_aplication/pages/get_started.dart';
-import 'package:food_delivery_aplication/pages/home/home_page.dart';
-import 'package:food_delivery_aplication/pages/home/main_page.dart';
-import 'package:food_delivery_aplication/pages/home/profile_page.dart';
-import 'package:food_delivery_aplication/pages/sign_in_page.dart';
-import 'package:food_delivery_aplication/pages/sign_up_page.dart';
-import 'package:food_delivery_aplication/pages/splash_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/home/home_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/home/main_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/home/profile_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/product/detail_product_page.dart';
+import 'package:food_delivery_aplication/presentation/profile/edit_profile.dart';
+import 'package:food_delivery_aplication/presentation/sign_in/sign_in_page.dart';
+import 'package:food_delivery_aplication/presentation/sign_up/sign_up_page.dart';
+import 'package:food_delivery_aplication/presentation/splash_page/get_started.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:get/get.dart';
+
+import '../presentation/splash_page/splash_page.dart';
 
 class AppRoute {
   static final pages = [

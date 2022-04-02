@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
+import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
-
-import '../shared/theme.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);

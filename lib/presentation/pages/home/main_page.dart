@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/pages/home/bag_page.dart';
-import 'package:food_delivery_aplication/pages/home/home_page.dart';
-import 'package:food_delivery_aplication/pages/home/profile_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/home/bag_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/home/home_page.dart';
+import 'package:food_delivery_aplication/presentation/pages/home/profile_page.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 

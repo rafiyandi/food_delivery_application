@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_delivery_aplication/pages/get_started.dart';
-import 'package:food_delivery_aplication/pages/splash_page.dart';
+import 'package:food_delivery_aplication/presentation/splash_page/splash_page.dart';
 import 'package:food_delivery_aplication/routes/page_route.dart';
 import 'package:get/get.dart';
 
