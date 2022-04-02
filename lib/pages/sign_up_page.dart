@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/pages/sign_in_page.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:get/get.dart';
 
 import '../shared/theme.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -90,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.grey.shade300,
                           blurRadius: 1,
                           spreadRadius: 1,
-                          offset: Offset(1, 3)),
+                          offset: const Offset(1, 3)),
                     ]),
                 child: Center(
                   child: Row(
@@ -141,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.grey.shade300,
                           blurRadius: 1,
                           spreadRadius: 1,
-                          offset: Offset(1, 3)),
+                          offset: const Offset(1, 3)),
                     ]),
                 child: Center(
                   child: Row(
@@ -191,7 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.grey.shade300,
                           blurRadius: 1,
                           spreadRadius: 1,
-                          offset: Offset(1, 3)),
+                          offset: const Offset(1, 3)),
                     ]),
                 child: Center(
                   child: Row(
@@ -237,7 +238,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: Colors.grey.shade300,
                         blurRadius: 1,
                         spreadRadius: 1,
-                        offset: Offset(1, 3)),
+                        offset: const Offset(1, 3)),
                   ]),
               child: Center(
                 child: Row(
@@ -268,22 +269,24 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
-    Widget signInButton() {
+    Widget signUpButton() {
       return Container(
         margin: const EdgeInsets.only(top: 30),
         height: 50,
         width: double.infinity,
         child: TextButton(
             // onPressed: hendleSignIn,
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(RouteName.mainPage);
+            },
             style: TextButton.styleFrom(
-                backgroundColor: primaryColor,
+                backgroundColor: priceColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: Text(
               "Submit",
               style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+                  secondaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
             )),
       );
     }
@@ -316,7 +319,7 @@ class _SignUpPageState extends State<SignUpPage> {
         resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 30),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -325,6 +328,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 usernameinput(),
                 emailInput(),
                 passwordInput(),
+                signUpButton(),
                 // isLoading ? LoadingButton() : signInButton(),
                 const Spacer(),
                 footer(),

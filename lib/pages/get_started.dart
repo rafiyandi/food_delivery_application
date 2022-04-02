@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/pages/home/main_page.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
@@ -43,9 +42,14 @@ class GetStarted extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 Center(
-                  child: Image.asset(
-                    "assets/icon/icon_splash.png",
-                    width: 81,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteName.signIn);
+                    },
+                    child: Image.asset(
+                      "assets/icon/icon_splash.png",
+                      width: 81,
+                    ),
                   ),
                 ),
                 const Spacer(),
@@ -55,7 +59,7 @@ class GetStarted extends StatelessWidget {
                   },
                   child: Center(
                     child: Text(
-                      "Login",
+                      "Skip",
                       style: subtitleTextStyle.copyWith(fontSize: 18),
                     ),
                   ),

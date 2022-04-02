@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_delivery_aplication/pages/home/main_page.dart';
-import 'package:food_delivery_aplication/pages/sign_in_page.dart';
+import 'package:food_delivery_aplication/pages/get_started.dart';
 import 'package:food_delivery_aplication/pages/splash_page.dart';
+import 'package:food_delivery_aplication/routes/page_route.dart';
+import 'package:get/get.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: const SplashPage(),
+      getPages: AppRoute.pages,
     );
   }
 }

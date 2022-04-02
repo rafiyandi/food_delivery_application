@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/pages/sign_up_page.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:get/get.dart';
 
 import '../shared/theme.dart';
 
 class SignInPage extends StatefulWidget {
+  const SignInPage({Key? key}) : super(key: key);
+
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -87,7 +88,7 @@ class _SignInPageState extends State<SignInPage> {
                           color: Colors.grey.shade300,
                           blurRadius: 1,
                           spreadRadius: 1,
-                          offset: Offset(1, 3)),
+                          offset: const Offset(1, 3)),
                     ]),
                 child: Center(
                   child: Row(
@@ -133,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                         color: Colors.grey.shade300,
                         blurRadius: 1,
                         spreadRadius: 1,
-                        offset: Offset(1, 3)),
+                        offset: const Offset(1, 3)),
                   ]),
               child: Center(
                 child: Row(
@@ -172,16 +173,16 @@ class _SignInPageState extends State<SignInPage> {
         child: TextButton(
             // onPressed: hendleSignIn,
             onPressed: () {
-              Get.toNamed(RouteName.home);
+              Get.toNamed(RouteName.mainPage);
             },
             style: TextButton.styleFrom(
-                backgroundColor: primaryColor,
+                backgroundColor: priceColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12))),
             child: Text(
               "Submit",
               style:
-                  primaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+                  secondaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
             )),
       );
     }
@@ -214,7 +215,7 @@ class _SignInPageState extends State<SignInPage> {
         resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 30),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -222,6 +223,7 @@ class _SignInPageState extends State<SignInPage> {
                 emailInput(),
                 passwordInput(),
                 // isLoading ? LoadingButton() : signInButton(),
+                signInButton(),
                 const Spacer(),
                 footer(),
               ],

@@ -189,29 +189,27 @@ class HomePage extends StatelessWidget {
           ));
     }
 
-    return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(top: 20, bottom: 10, left: 24, right: 24),
-        child: ListView(
-          children: [
-            location(),
-            headerDelivery(),
-            search(),
-            titleCatagories(),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  scrollCategories("assets/img/image_burger.png", "Burger"),
-                  scrollCategories("assets/icon/icon_sandwich.png", "Sandwich"),
-                  scrollCategories("assets/img/image_burger.png", "Burger"),
-                  scrollCategories("assets/img/image_burger.png", "Burger"),
-                ],
-              ),
+    return Container(
+      margin: const EdgeInsets.only(top: 20, bottom: 10, left: 24, right: 24),
+      child: ListView(
+        children: [
+          location(),
+          headerDelivery(),
+          search(),
+          titleCatagories(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                scrollCategories("assets/img/image_burger.png", "Burger"),
+                scrollCategories("assets/icon/icon_sandwich.png", "Sandwich"),
+                scrollCategories("assets/img/image_burger.png", "Burger"),
+                scrollCategories("assets/img/image_burger.png", "Burger"),
+              ],
             ),
-            content()
-          ],
-        ),
+          ),
+          content()
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
+import 'package:get/get.dart';
 
 class DetailProductPage extends StatefulWidget {
   const DetailProductPage({Key? key}) : super(key: key);
@@ -59,7 +60,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.back();
                   },
                   child: Image.asset(
                     "assets/icon/button_back.png",

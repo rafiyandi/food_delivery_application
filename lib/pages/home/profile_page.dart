@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/pages/home/edit_profile.dart';
+import 'package:food_delivery_aplication/pages/edit_profile.dart';
 import 'package:food_delivery_aplication/pages/sign_in_page.dart';
+import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // AuthProvider authProvider = Provider.of<AuthProvider>(context);
@@ -15,7 +19,7 @@ class ProfilePage extends StatelessWidget {
         elevation: 0,
         flexibleSpace: SafeArea(
             child: Container(
-          margin: EdgeInsets.all(30),
+          margin: const EdgeInsets.all(30),
           child: Row(
             children: [
               ClipOval(
@@ -23,7 +27,7 @@ class ProfilePage extends StatelessWidget {
                 "assets/img/image_profile_user.png",
                 width: 64,
               )),
-              SizedBox(
+              const SizedBox(
                 width: 16,
               ),
               Expanded(
@@ -46,10 +50,7 @@ class ProfilePage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignInPage()),
-                      (route) => false);
+                  Get.offAllNamed(RouteName.signIn);
                 },
                 child: Image.asset(
                   "assets/icon/icon_exit_button.png",
@@ -64,7 +65,7 @@ class ProfilePage extends StatelessWidget {
 
     Widget menuItem(text) {
       return Container(
-        margin: EdgeInsets.only(top: 16),
+        margin: const EdgeInsets.only(top: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -84,13 +85,13 @@ class ProfilePage extends StatelessWidget {
     Widget content() {
       return Expanded(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           width: double.infinity,
           // decoration: BoxDecoration(color: backgroundColor3),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -100,13 +101,12 @@ class ProfilePage extends StatelessWidget {
               ),
               GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Editprofile()));
+                    Get.toNamed(RouteName.editProfile);
                   },
                   child: menuItem("Edit Profile")),
               menuItem("Your Orders"),
               menuItem("Help"),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
                 "General",
                 style: primaryTextStyle.copyWith(

@@ -100,9 +100,9 @@ class _MainPageState extends State<MainPage> {
       case 0:
         return const HomePage();
       case 1:
-        return const BagPage();
+        return BagPage();
       case 2:
-        return ProfilePage();
+        return const ProfilePage();
       default:
         return const HomePage();
     }
