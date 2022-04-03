@@ -173,13 +173,7 @@ class _SignInPageState extends State<SignInPage> {
         width: double.infinity,
         child: TextButton(
             // onPressed: hendleSignIn,
-            onPressed: () async {
-              try {
-                await _validateAuthentication();
-              } on Exception catch (e) {
-                Get.snackbar('hi', e.toString());
-              }
-            },
+            onPressed: () async {},
             style: TextButton.styleFrom(
                 backgroundColor: priceColor,
                 shape: RoundedRectangleBorder(
@@ -238,17 +232,5 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
         ));
-  }
-
-  Future<void> _validateAuthentication() async {
-    if (_formkey.currentState!.validate()) {
-      AuthRepository _authRepository = AuthRepository();
-      _authRepository
-          .signIn(emailController.text, passwordController.text)
-          .then((value) => print("Berhasil masuk"))
-          .catchError((error) => print(error));
-    } else {
-      print("Not Validated");
-    }
   }
 }

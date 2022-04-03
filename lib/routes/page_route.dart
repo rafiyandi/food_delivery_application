@@ -35,7 +35,7 @@ class AppRoute {
     ),
     GetPage(
       name: RouteName.home,
-      page: () => const HomePage(),
+      page: () => HomePage(),
     ),
     GetPage(
       name: RouteName.detailProduct,

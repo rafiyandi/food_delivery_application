@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
@@ -19,7 +20,15 @@ class _SplashPageState extends State<SplashPage> {
     // TODO: implement initState
 
     super.initState();
-    Timer(const Duration(seconds: 3), () => Get.toNamed(RouteName.getStarted));
+    Timer(const Duration(seconds: 3), () {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, '/main-page');
+        print(user.email);
+      } else {
+        Navigator.pushReplacementNamed(context, '/Sign-up');
+      }
+    });
   }
 
   @override

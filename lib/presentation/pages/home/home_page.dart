@@ -3,7 +3,7 @@ import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:food_delivery_aplication/widgets/product_tile.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +72,6 @@ class HomePage extends StatelessWidget {
                       Image.asset("assets/icon/icon_search.png"),
                       const SizedBox(
                         width: 15,
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration.collapsed(
-                              hintStyle:
-                                  subtitleTextStyle.copyWith(fontSize: 18),
-                              hintText: "Search"),
-                        ),
                       ),
                     ],
                   )),
@@ -152,64 +144,34 @@ class HomePage extends StatelessWidget {
           margin: const EdgeInsets.only(top: 16),
           child: Column(
             children: [
-              Row(
-                children: const [
-                  ProductTile(),
-                  SizedBox(
-                    width: 17,
-                  ),
-                  ProductTile(),
-                ],
-              ),
-              const SizedBox(
-                height: 17,
-              ),
-              Row(
-                children: const [
-                  ProductTile(),
-                  SizedBox(
-                    width: 17,
-                  ),
-                  ProductTile(),
-                ],
-              ),
-              const SizedBox(
-                height: 17,
-              ),
-              Row(
-                children: const [
-                  ProductTile(),
-                  SizedBox(
-                    width: 17,
-                  ),
-                  ProductTile(),
-                ],
-              ),
+              ProductTile(),
             ],
           ));
     }
 
-    return Container(
-      margin: const EdgeInsets.only(top: 20, bottom: 10, left: 24, right: 24),
-      child: ListView(
-        children: [
-          location(),
-          headerDelivery(),
-          search(),
-          titleCatagories(),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                scrollCategories("assets/img/image_burger.png", "Burger"),
-                scrollCategories("assets/icon/icon_sandwich.png", "Sandwich"),
-                scrollCategories("assets/img/image_burger.png", "Burger"),
-                scrollCategories("assets/img/image_burger.png", "Burger"),
-              ],
+    return Scaffold(
+      body: Container(
+        margin: const EdgeInsets.only(top: 20, bottom: 10, left: 24, right: 24),
+        child: ListView(
+          children: [
+            location(),
+            headerDelivery(),
+            search(),
+            titleCatagories(),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  scrollCategories("assets/img/image_burger.png", "Burger"),
+                  scrollCategories("assets/icon/icon_sandwich.png", "Sandwich"),
+                  scrollCategories("assets/img/image_burger.png", "Burger"),
+                  scrollCategories("assets/img/image_burger.png", "Burger"),
+                ],
+              ),
             ),
-          ),
-          content()
-        ],
+            // content()
+          ],
+        ),
       ),
     );
   }

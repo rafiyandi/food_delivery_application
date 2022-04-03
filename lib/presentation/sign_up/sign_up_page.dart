@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_aplication/aplication/auth/cubit/auth_cubit.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
@@ -269,24 +271,36 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     Widget signUpButton() {
-      return Container(
-        margin: const EdgeInsets.only(top: 30),
-        height: 50,
-        width: double.infinity,
-        child: TextButton(
-            // onPressed: hendleSignIn,
-            onPressed: () {
-              Get.toNamed(RouteName.mainPage);
-            },
-            style: TextButton.styleFrom(
-                backgroundColor: priceColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12))),
-            child: Text(
-              "Submit",
-              style:
-                  secondaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
-            )),
+      return BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess) {
+            Get.snackbar(
+              "login Berhasil",
+              "Happy Shopping",
+            );
+            Get.offAllNamed(RouteName.home);
+          } else if (state is AuthFailed) {
+            Get.snackbar(
+              "Error",
+              state.errorMessage,
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+              snackPosition: SnackPosition.BOTTOM,
+              margin: EdgeInsets.all(16),
+            );
+          }
+        },
+        // TODO: implement listener
+        builder: (context, state) {
+          return Container(
+            margin: const EdgeInsets.only(top: 30),
+            height: 50,
+            width: double.infinity,
+            child: (state is AuthLoading)
+                ? _loginLoadingButton()
+                : _loginButton(context),
+          );
+        },
       );
     }
 
@@ -335,5 +349,35 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         ));
+  }
+
+  TextButton _loginButton(BuildContext context) {
+    return TextButton(
+        // onPressed: hendleSignIn,
+        onPressed: () {
+          context.read<AuthCubit>().signUp(
+              fullname: fullnameController.text,
+              username: usernameController.text,
+              email: emailController.text,
+              password: passwordController.text);
+        },
+        style: TextButton.styleFrom(
+            backgroundColor: priceColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
+        child: Text(
+          "Submit",
+          style: secondaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+        ));
+  }
+
+  TextButton _loginLoadingButton() {
+    return TextButton(
+        onPressed: null,
+        style: TextButton.styleFrom(
+            backgroundColor: priceColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
+        child: CircularProgressIndicator());
   }
 }

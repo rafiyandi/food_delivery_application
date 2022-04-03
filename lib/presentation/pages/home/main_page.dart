@@ -98,13 +98,13 @@ class _MainPageState extends State<MainPage> {
   Widget body() {
     switch (_currentindex) {
       case 0:
-        return const HomePage();
+        return HomePage();
       case 1:
         return BagPage();
       case 2:
-        return const ProfilePage();
+        return ProfilePage();
       default:
-        return const HomePage();
+        return HomePage();
     }
   }
 

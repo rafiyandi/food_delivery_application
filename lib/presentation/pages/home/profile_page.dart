@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_aplication/aplication/auth/cubit/auth_cubit.dart';
 import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
@@ -46,14 +48,32 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Get.offAllNamed(RouteName.signIn);
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+
+                  if (state is AuthFailed) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(state.errorMessage),
+                      backgroundColor: Colors.red,
+                    ));
+                  } else if (state is AuthInitial) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/sign-up', (route) => false);
+                  }
                 },
-                child: Image.asset(
-                  "assets/icon/icon_exit_button.png",
-                  width: 20,
-                ),
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return Center(child: const CircularProgressIndicator());
+                  }
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Image.asset(
+                      "assets/icon/icon_exit_button.png",
+                      width: 20,
+                    ),
+                  );
+                },
               )
             ],
           ),
