@@ -60,7 +60,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Navigator.pop(context);
                   },
                   child: Image.asset(
                     "assets/icon/button_back.png",

@@ -143,6 +143,7 @@ class HomePage extends StatelessWidget {
       return Container(
           margin: const EdgeInsets.only(top: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProductTile(),
             ],
@@ -169,7 +170,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            // content()
+            content()
           ],
         ),
       ),
