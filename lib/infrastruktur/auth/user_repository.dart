@@ -7,6 +7,7 @@ class UserRepository {
   CollectionReference _userReference =
       FirebaseFirestore.instance.collection('users');
 
+//menampilkan data dinamis
   Future<void> setUser(UserModel user) async {
     try {
       _userReference.doc(user.id).set({
@@ -19,4 +20,31 @@ class UserRepository {
       throw Exception(e);
     }
   }
+
+  Future<UserModel> getUserById(String id) async {
+    try {
+      DocumentSnapshot snapshot = await _userReference.doc(id).get();
+      return UserModel(
+          id: id,
+          fullname: snapshot['fullname'],
+          username: snapshot['username'],
+          email: snapshot['email'],
+          password: snapshot['password']);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // Future<void> updateUser(
+  //     String fullname, String email, String username) async {
+  //   try {
+  //     return await _userReference.doc().update({
+  //       'fullname': fullname,
+  //       'email': email,
+  //       'username': username,
+  //     });
+  //   } catch (e) {
+  //     throw Exception(e);
+  //   }
+  // }
 }

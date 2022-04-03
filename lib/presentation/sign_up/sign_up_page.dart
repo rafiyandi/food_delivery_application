@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery_aplication/aplication/auth/cubit/auth_cubit.dart';
-import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
 
@@ -18,32 +17,17 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController(text: '');
   TextEditingController passwordController = TextEditingController(text: '');
   bool isLoading = false;
+
+  bool _isHiddenPassword = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHiddenPassword = !_isHiddenPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-
-    // hendleSignIn() async {
-    //   setState(() {
-    //     isLoading = true;
-    //   });
-
-    //   if (await authProvider.login(
-    //       email: emailController.text, password: passwordController.text)) {
-    //     Navigator.pushNamed(context, '/home');
-    //   } else {
-    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //         'Login Gagal',
-    //         textAlign: TextAlign.center,
-    //       ),
-    //       backgroundColor: alertColor,
-    //     ));
-    //   }
-    //   setState(() {
-    //     isLoading = false;
-    //   });
-    // }
-
     Widget header() {
       return Container(
           margin: const EdgeInsets.only(
@@ -229,7 +213,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 12),
             Container(
               height: 50,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 1),
               decoration: BoxDecoration(
                   color: secondaryColor,
                   borderRadius: BorderRadius.circular(12),
@@ -252,15 +236,28 @@ class _SignUpPageState extends State<SignUpPage> {
                       width: 16,
                     ),
                     Expanded(
-                        child: TextFormField(
-                      controller: passwordController,
-                      style: primaryTextStyle,
-                      obscureText: true,
-                      decoration: InputDecoration.collapsed(
-                        hintText: "Your Password",
-                        hintStyle: subtitleTextStyle,
+                      child: TextFormField(
+                        controller: passwordController,
+                        style: primaryTextStyle,
+                        obscureText: _isHiddenPassword,
+                        decoration: InputDecoration(
+                          suffixIcon: GestureDetector(
+                            onTap: _togglePasswordVisibility,
+                            child: Icon(
+                              _isHiddenPassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color:
+                                  _isHiddenPassword ? priceColor : Colors.grey,
+                            ),
+                          ),
+                          border: InputBorder.none,
+                          // isCollapsed: true,
+                          hintText: "Your Password",
+                          hintStyle: subtitleTextStyle,
+                        ),
                       ),
-                    ))
+                    )
                   ],
                 ),
               ),
@@ -274,20 +271,18 @@ class _SignUpPageState extends State<SignUpPage> {
       return BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Get.snackbar(
-              "login Berhasil",
-              "Happy Shopping",
-            );
-            Get.offAllNamed(RouteName.home);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Sign Up Success"),
+              duration: Duration(seconds: 1),
+              backgroundColor: priceColor,
+            ));
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/main-page', (route) => false);
           } else if (state is AuthFailed) {
-            Get.snackbar(
-              "Error",
-              state.errorMessage,
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(state.errorMessage),
               backgroundColor: Colors.red,
-              colorText: Colors.white,
-              snackPosition: SnackPosition.BOTTOM,
-              margin: EdgeInsets.all(16),
-            );
+            ));
           }
         },
         // TODO: implement listener
@@ -314,7 +309,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: subtitleTextStyle.copyWith(fontSize: 12)),
             GestureDetector(
               onTap: () {
-                Get.toNamed(RouteName.signIn);
+                Navigator.pushNamed(context, '/sign-in');
               },
               child: Text(
                 "Sign In",

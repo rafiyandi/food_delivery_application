@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/infrastruktur/auth/auth_repository.dart';
-import 'package:food_delivery_aplication/routes/route_name.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_aplication/aplication/auth/cubit/auth_cubit.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
 
@@ -167,23 +167,31 @@ class _SignInPageState extends State<SignInPage> {
     }
 
     Widget signInButton() {
-      return Container(
-        margin: const EdgeInsets.only(top: 30),
-        height: 50,
-        width: double.infinity,
-        child: TextButton(
-            // onPressed: hendleSignIn,
-            onPressed: () async {},
-            style: TextButton.styleFrom(
-                backgroundColor: priceColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12))),
-            child: Text(
-              "Submit",
-              style:
-                  secondaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
-            )),
-      );
+      return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+        // TODO: implement listener
+        if (state is AuthSuccess) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/main-page', (route) => false);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Login Berhasil'),
+            backgroundColor: priceColor,
+          ));
+        } else if (state is AuthFailed) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(state.errorMessage),
+            backgroundColor: Colors.red,
+          ));
+        }
+      }, builder: (context, state) {
+        return Container(
+          margin: const EdgeInsets.only(top: 30),
+          height: 50,
+          width: double.infinity,
+          child: (state is AuthLoading)
+              ? _loadingButtonLogin()
+              : _buttonLogin(context),
+        );
+      });
     }
 
     Widget footer() {
@@ -196,7 +204,7 @@ class _SignInPageState extends State<SignInPage> {
                 style: subtitleTextStyle.copyWith(fontSize: 12)),
             GestureDetector(
               onTap: () {
-                Get.toNamed(RouteName.signUp);
+                Navigator.pushNamed(context, '/sign-up');
               },
               child: Text(
                 "Sign Up",
@@ -232,5 +240,33 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
         ));
+  }
+
+  TextButton _buttonLogin(BuildContext context) {
+    return TextButton(
+        // onPressed: hendleSignIn,
+        onPressed: () {
+          context.read<AuthCubit>().signIn(
+              email: emailController.text, password: passwordController.text);
+        },
+        style: TextButton.styleFrom(
+            backgroundColor: priceColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
+        child: Text(
+          "Submit",
+          style: secondaryTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+        ));
+  }
+
+  TextButton _loadingButtonLogin() {
+    return TextButton(
+        onPressed: null,
+        // onPressed: hendleSignIn,
+        style: TextButton.styleFrom(
+            backgroundColor: priceColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
+        child: CircularProgressIndicator());
   }
 }

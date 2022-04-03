@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +43,7 @@ class GetStarted extends StatelessWidget {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteName.signIn);
+                      Navigator.pushReplacementNamed(context, '/sign-in');
                     },
                     child: Image.asset(
                       "assets/icon/icon_splash.png",
@@ -55,7 +54,7 @@ class GetStarted extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteName.signIn);
+                    Navigator.pushReplacementNamed(context, '/sign-in');
                   },
                   child: Center(
                     child: Text(

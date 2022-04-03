@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_aplication/routes/route_name.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
-import 'package:get/get.dart';
+
+import '../../aplication/auth/cubit/auth_cubit.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -23,10 +24,11 @@ class _SplashPageState extends State<SplashPage> {
     Timer(const Duration(seconds: 3), () {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        Navigator.pushReplacementNamed(context, '/main-page');
         print(user.email);
+        context.read<AuthCubit>().getCurrentUser(user.uid);
+        Navigator.pushReplacementNamed(context, '/main-page');
       } else {
-        Navigator.pushReplacementNamed(context, '/Sign-up');
+        Navigator.pushReplacementNamed(context, '/get-started');
       }
     });
   }

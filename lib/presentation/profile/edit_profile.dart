@@ -104,7 +104,7 @@ class EditProfilePage extends StatelessWidget {
           automaticallyImplyLeading: false,
           leading: IconButton(
               onPressed: () {
-                Get.back();
+                Navigator.pop(context);
               },
               icon: Icon(
                 Icons.close,

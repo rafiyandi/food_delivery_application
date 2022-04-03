@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery_aplication/aplication/auth/cubit/auth_cubit.dart';
-import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
+
+import '../../../aplication/auth/cubit/auth_cubit.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -13,71 +13,81 @@ class ProfilePage extends StatelessWidget {
     // AuthProvider authProvider = Provider.of<AuthProvider>(context);
     // UserModel user = authProvider.user;
     Widget header() {
-      return AppBar(
-        backgroundColor: backgroundColor1,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        flexibleSpace: SafeArea(
-            child: Container(
-          margin: const EdgeInsets.all(30),
-          child: Row(
-            children: [
-              ClipOval(
-                  child: Image.asset(
-                "assets/img/image_profile_user.png",
-                width: 64,
-              )),
-              const SizedBox(
-                width: 16,
+      return BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          // TODO: implement listener
+          if (state is AuthFailed) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(state.errorMessage),
+              backgroundColor: Colors.red,
+            ));
+          } else if (state is AuthInitial) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/sign-up', (route) => false);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Berhasil Keluar"),
+                backgroundColor: priceColor,
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is AuthLoading) {
+            return Center(child: const CircularProgressIndicator());
+          } else if (state is AuthSuccess) {
+            return AppBar(
+              backgroundColor: backgroundColor1,
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              flexibleSpace: SafeArea(
+                  child: Container(
+                margin: const EdgeInsets.all(30),
+                child: Row(
                   children: [
-                    Text(
-                      "Hallo, Rafi",
-                      style: titleTextStyle.copyWith(
-                          fontSize: 24, fontWeight: semiBold),
+                    ClipOval(
+                        child: Image.asset(
+                      "assets/img/image_profile_user.png",
+                      width: 64,
+                    )),
+                    const SizedBox(
+                      width: 16,
                     ),
-                    Text(
-                      "@Rafiyandi",
-                      style: secondSubtitleTextStyle.copyWith(
-                        fontSize: 16,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Hallo, ${state.user.fullname}",
+                            style: titleTextStyle.copyWith(
+                                fontSize: 24, fontWeight: semiBold),
+                          ),
+                          Text(
+                            "@${state.user.username}",
+                            style: secondSubtitleTextStyle.copyWith(
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.read<AuthCubit>().signOut();
+                      },
+                      child: Image.asset(
+                        "assets/icon/icon_exit_button.png",
+                        width: 20,
                       ),
                     )
                   ],
                 ),
-              ),
-              BlocConsumer<AuthCubit, AuthState>(
-                listener: (context, state) {
-                  // TODO: implement listener
-
-                  if (state is AuthFailed) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(state.errorMessage),
-                      backgroundColor: Colors.red,
-                    ));
-                  } else if (state is AuthInitial) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/sign-up', (route) => false);
-                  }
-                },
-                builder: (context, state) {
-                  if (state is AuthLoading) {
-                    return Center(child: const CircularProgressIndicator());
-                  }
-                  return GestureDetector(
-                    onTap: () {},
-                    child: Image.asset(
-                      "assets/icon/icon_exit_button.png",
-                      width: 20,
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
-        )),
+              )),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       );
     }
 
@@ -119,7 +129,7 @@ class ProfilePage extends StatelessWidget {
               ),
               GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteName.editProfile);
+                    Navigator.pushNamed(context, '/editprofile');
                   },
                   child: menuItem("Edit Profile")),
               menuItem("Your Orders"),

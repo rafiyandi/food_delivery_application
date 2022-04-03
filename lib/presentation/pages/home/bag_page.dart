@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_aplication/presentation/bag/bag_card.dart';
-import 'package:food_delivery_aplication/routes/route_name.dart';
 import 'package:food_delivery_aplication/shared/theme.dart';
 import 'package:get/get.dart';
 
@@ -40,7 +39,7 @@ class BagPage extends StatelessWidget {
               width: 152,
               child: TextButton(
                   onPressed: () {
-                    Get.toNamed(RouteName.home);
+                    Navigator.pushNamed(context, '/home');
                   },
                   style: TextButton.styleFrom(
                       backgroundColor: priceColor,
